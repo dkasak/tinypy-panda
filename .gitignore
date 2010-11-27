@@ -1,0 +1,6 @@
+Makefile.bak
+Makefile-tinypy-harryr.mk
+.dep.inc
+*.d
+.bzr
+nbproject
