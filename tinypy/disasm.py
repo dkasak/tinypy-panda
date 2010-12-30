@@ -84,7 +84,9 @@ def disassemble(bc):
             n = b * 256 + c
             line += " \"" + text(n,ip,bc) + "\""
             line = trim(line)
-            ip += (int(n / 4) + 1) * 4 
+            derp = n / 4
+            derp = int(derp)
+            ip += (derp + 1) * 4 
         elif names[i] == "NUMBER":   
             f = funpack(text(8,ip,bc))
             line += " " + str(f)

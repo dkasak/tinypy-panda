@@ -90,6 +90,11 @@ void tp_delete(TP,tp_obj v) {
         tp_free(tp, v.fnc.info);
         return;
     }
+	else if( type == TP_FRAME ) {
+		tp_frame_ *f = v.frame.val;
+		tp_free(tp, f);
+		return;
+	}
     tp_raise(,tp_string("(tp_delete) TypeError: ?"));
 }
 

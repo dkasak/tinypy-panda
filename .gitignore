@@ -3,6 +3,9 @@ tinypy/*_auto.h
 *.tpc
 *.o
 *.pyc
+tinypy/tmp.txt
+tinypy/tmp1.py
+tinypy/tmp2.py
 Makefile.bak
 Makefile-tinypy-harryr.mk
 .dep.inc

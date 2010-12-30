@@ -187,7 +187,7 @@ typedef struct tp_frame_ {
 #define TP_FRAMES 256
 #define TP_REGS_EXTRA 2
 /* #define TP_REGS_PER_FRAME 256*/
-#define TP_REGS 16384
+#define TP_REGS 1000
 
 /* Type: tp_vm
  * Representation of a tinypy virtual machine instance.

@@ -14,6 +14,8 @@
 #include "string_auto.h"
 #endif
 
+#include <assert.h>
+
 tp_obj tp_sub(TP,tp_obj _a,tp_obj _b);
 tp_obj tp_div(TP,tp_obj _a,tp_obj _b);
 tp_obj tp_pow(TP,tp_obj _a,tp_obj _b);
@@ -23,6 +25,8 @@ tp_obj tp_bitwise_xor(TP,tp_obj _a,tp_obj _b);
 tp_obj tp_mod(TP,tp_obj _a,tp_obj _b);
 tp_obj tp_lsh(TP,tp_obj _a,tp_obj _b);
 tp_obj tp_rsh(TP,tp_obj _a,tp_obj _b);
+
+void tp_frame(TP,tp_obj globals,tp_obj code,tp_obj *ret_dest);
 
 tp_vm *_tp_init(void) {
     int i;
@@ -58,7 +62,8 @@ tp_vm *_tp_init(void) {
     tp_set(tp, sys, tp_string("version"), tp_string("tinypy 1.2+SVN+PANDA"));
     tp_set(tp,tp->modules, tp_string("sys"), sys);
     tp->regs = tp->_regs.list.val->items;
-    tp_full(tp);
+	tp_frame(tp,tp_None,tp_None,NULL);
+    tp_full(tp);	
     return tp;
 }
 
@@ -188,9 +193,10 @@ int tp_frame_count(TP) {
 }
 
 tp_frame_* tp_frame_get(TP, int i) {
+	assert( i >= 0 );
 	tp_obj frame_obj = _tp_list_get(tp, tp->_frames.list.val, i, NULL);
-        tp_type(tp, TP_FRAME, frame_obj);
-        return (tp_frame_*)frame_obj.frame.val;
+	tp_type(tp, TP_FRAME, frame_obj);
+	return (tp_frame_*)frame_obj.frame.val;
 }
 
 
@@ -456,7 +462,7 @@ tp_obj tp_ez_call(TP, const char *mod, const char *fnc, tp_obj params) {
 
 tp_obj _tp_import(TP, tp_obj fname, tp_obj name, tp_obj code) {
     tp_obj g;
-
+	
     if (!((fname.type != TP_NONE && _tp_str_index(fname,tp_string(".tpc"))!=-1) || code.type != TP_NONE)) {
         return tp_ez_call(tp,"py2bc","import_fname",tp_params_v(tp,2,fname,name));
     }

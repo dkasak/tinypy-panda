@@ -7,8 +7,8 @@ import disasm
 
 ################################################################################
 RM = 'rm -f '
-VM = './vm '
-TINYPY = './tinypy '
+VM = '../build/vm '
+TINYPY = '../build/tinypy '
 TMP = 'tmp.txt'
 if '-mingw32' in ARGV or "-win" in ARGV:
     RM = 'del '
