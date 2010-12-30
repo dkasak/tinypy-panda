@@ -1,6 +1,12 @@
+tinypy-panda.*
+tinypy/*_auto.h
+*.tpc
+*.o
+*.pyc
 Makefile.bak
 Makefile-tinypy-harryr.mk
 .dep.inc
 *.d
 .bzr
 nbproject
+build/

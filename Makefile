@@ -15,8 +15,11 @@ all: build/tinypy $(PY2BC_OBJ)
 
 -include $(AUTODEPS)
 
-build/tinypy: $(TINYPY_OBJ) $(CORE_OBJ)
-	$(CC) $(WFLAGS) $(CFLAGS) -o $@ $+
+build:
+	@mkdir -p build
+
+build/tinypy: build $(TINYPY_OBJ) $(CORE_OBJ)
+	$(CC) $(WFLAGS) $(CFLAGS) -o $@ $(TINYPY_OBJ) $(CORE_OBJ)
 
 $(AUTODEPS): $(AUTOHEADERS)
 
